@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="450.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.bsuir.karalionak.metrology.MenuController">
+   <children>
+      <MenuBar layoutY="1.0" prefHeight="26.0" prefWidth="600.0">
+        <menus>
+          <Menu mnemonicParsing="false" text="File">
+            <items>
+              <MenuItem fx:id="OpenFileMenuItem" mnemonicParsing="false" onAction="#OpenFileAction" text="Open File" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Edit">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Delete" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Help">
+            <items>
+              <MenuItem mnemonicParsing="false" text="About" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+      <TableView fx:id="TableInfo" layoutY="27.0" prefHeight="442.0" prefWidth="600.0">
+        <columns>
+          <TableColumn fx:id="NumberJ" prefWidth="66.19999539852142" text="NumberJ" />
+          <TableColumn fx:id="Operator" prefWidth="145.8000259399414" text="Operators" />
+            <TableColumn fx:id="F_Operator" prefWidth="70.5999755859375" text="F(j)" />
+            <TableColumn fx:id="NumberI" prefWidth="79.0" text="NumberI" />
+            <TableColumn fx:id="Operands" prefWidth="165.79995727539062" text="Operands" />
+            <TableColumn fx:id="F_Operands" prefWidth="73.39996337890625" text="F(i)" />
+        </columns>
+      </TableView>
+   </children>
+</AnchorPane>
