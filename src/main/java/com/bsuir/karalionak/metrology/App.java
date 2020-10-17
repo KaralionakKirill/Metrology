@@ -9,6 +9,15 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class App extends Application {
+    private static Stage appStage;
+
+    public static Stage getAppStage() {
+        return appStage;
+    }
+
+    public static void main(String[] args) {
+        launch();
+    }
 
     @Override
     public void start(Stage stage) throws IOException {
@@ -16,17 +25,11 @@ public class App extends Application {
         stage.setScene(scene);
         stage.show();
         stage.setResizable(false);
-        MenuController.setStage(stage);
     }
-
 
     private Parent loadFXML() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("menu" + ".fxml"));
         return fxmlLoader.load();
-    }
-
-    public static void main(String[] args) {
-        launch();
     }
 
 }

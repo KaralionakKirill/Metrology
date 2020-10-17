@@ -1,50 +1,63 @@
 package com.bsuir.karalionak.metrology;
 
+import com.bsuir.karalionak.metrology.model.Item;
 import com.bsuir.karalionak.metrology.model.LexemInf;
 import com.bsuir.karalionak.metrology.model.Lexems;
 import com.bsuir.karalionak.metrology.service.FileService;
 import com.bsuir.karalionak.metrology.service.Lexer;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.FileChooser;
-import javafx.stage.Stage;
 
 import java.io.File;
+import java.net.URL;
 import java.util.ArrayList;
+import java.util.ResourceBundle;
 
-public class MenuController {
-    public MenuItem OpenFileMenuItem;
-    public TableView<LexemInf> TableInfo;
+public class MenuController implements Initializable {
+    private static final ObservableList<Item> dataOperator = FXCollections.observableArrayList();
+    private static final ObservableList<Item> dataOperand = FXCollections.observableArrayList();
+
+
     private final Lexems lexems;
     private final Lexer lexer;
-    private static Stage stage;
-    public TableColumn<LexemInf, Integer> NumberJ;
-    public TableColumn<LexemInf, LexemInf> Operator;
-    public TableColumn<LexemInf, Integer> F_Operator;
-    public TableColumn<LexemInf, Integer> NumberI;
-    public TableColumn<LexemInf, LexemInf> Operands;
-    public TableColumn<LexemInf, Integer> F_Operands;
+
+
+    public MenuItem OpenFileMenuItem;
+    public TableView<Item> TableInfo;
+    public TableColumn<Item, Integer> NumberJ;
+    public TableColumn<Item, String> Operators;
+    public TableColumn<Item, Integer> F_Operators;
+    public TableColumn<Item, Integer> NumberI;
+    public TableColumn<Item, String> Operands;
+    public TableColumn<Item, Integer> F_Operands;
 
     {
         lexems = new Lexems();
         lexer = new Lexer();
     }
 
-    public static void setStage(Stage stage) {
-        MenuController.stage = stage;
-    }
-
     public void OpenFileAction(ActionEvent actionEvent) {
         FileChooser fileChooser = new FileChooser();
-        File file = fileChooser.showOpenDialog(stage);
-        if(file != null) {
+        File file = fileChooser.showOpenDialog(App.getAppStage());
+        if (file != null && file.getAbsolutePath().matches("^.+.txt$")) {
             FileService fileService = new FileService(file);
             initLexems(fileService);
-            //fillTable();
+            fillTable();
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error file");
+            alert.setHeaderText(null);
+            alert.setContentText((file == null ? "You haven't selected a file. " : "Selected" +
+                    "file is not a Python program. ") + "Please, try again.");
+            alert.showAndWait();
         }
     }
 
@@ -55,15 +68,24 @@ public class MenuController {
         lexer.lexAlloc(operands, operator, lexems.getLexems());
         lexems.setOperands(lexer.getLexemInfo(operands));
         lexems.setOperators(lexer.getLexemInfo(operator));
+        fillData(lexems.getOperators(), lexems.getOperands());
         System.out.println(lexems.getOperands());
         System.out.println(lexems.getOperators());
     }
 
-    private void fillTable(){
-        ObservableList<LexemInf> operatorsList = (ObservableList<LexemInf>) lexems.getOperators();
-        TableInfo = new TableView<LexemInf>(operatorsList);
-        Operator.setCellValueFactory(new PropertyValueFactory<LexemInf, LexemInf>("operators"));
+    private void fillTable() {
+        TableInfo.setItems(dataOperand);
+    }
 
+    private static void fillData(ArrayList<LexemInf> operators, ArrayList<LexemInf> operands){
+        int id = 1;
+        for(LexemInf lexem: operands){
+            dataOperand.add(new Item(lexem.getName(), lexem.getCount(), id++));
+        }
+        id = 1;
+        for(LexemInf lexem: operators){
+            dataOperand.add(new Item(lexem.getName(), lexem.getCount(), id++));
+        }
     }
 
     private void displayMetrics() {
@@ -92,5 +114,13 @@ public class MenuController {
 //                "Длина программы: " + programLength + "\n" +
 //                "Объём программы: " + programScope, "Метрики Холстеда", JOptionPane.INFORMATION_MESSAGE);
 
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        Operators.setCellValueFactory(new PropertyValueFactory<>("name"));
+        F_Operators.setCellValueFactory(new PropertyValueFactory<>("count"));
+        Operands.setCellValueFactory(new PropertyValueFactory<>("name"));
+        F_Operands.setCellValueFactory(new PropertyValueFactory<>("count"));
     }
 }
