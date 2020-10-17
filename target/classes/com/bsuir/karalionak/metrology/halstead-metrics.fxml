@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.bsuir.karalionak.metrology.HalsteadMetricsController">
+  <MenuBar layoutY="1.0" prefHeight="26.0" prefWidth="600.0">
+    <Menu mnemonicParsing="false" text="File">
+      <MenuItem fx:id="OpenFileMenuItem" mnemonicParsing="false" onAction="#OpenFileAction" text="Open File" />
+    </Menu>
+  </MenuBar>
+  <TableView fx:id="TableOfOperators" layoutY="27.0" prefHeight="442.0" prefWidth="300.0">
+    <columns>
+      <TableColumn fx:id="NumberJ" prefWidth="50.0" text="N" />
+      <TableColumn fx:id="Operators" prefWidth="200.0" text="Operators" />
+      <TableColumn fx:id="F_Operators" prefWidth="50.0" text="F()" />
+    </columns>
+  </TableView>
+   <TableView fx:id="TableOfOperands" layoutX="300.0" layoutY="27.0" prefHeight="442.0" prefWidth="300.0">
+     <columns>
+       <TableColumn fx:id="NumberI" prefWidth="50.0" text="N" />
+         <TableColumn fx:id="Operands" prefWidth="200.0" text="Operands" />
+         <TableColumn fx:id="F_Operands" prefWidth="50.0" text="F()" />
+     </columns>
+   </TableView>
+   <Text fx:id="UDS" layoutX="30.0" layoutY="488.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Uniquie operands: " />
+   <Text fx:id="TRS" layoutX="314.0" layoutY="488.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Total operators occurrence: " />
+   <Text fx:id="TDS" layoutX="314.0" layoutY="511.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Total operands occurrence: " />
+   <Text fx:id="URS" layoutX="30.0" layoutY="511.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Uniquie operators: " />
+   <Text fx:id="PD" layoutX="30.0" layoutY="538.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Program dictionary: " />
+   <Text fx:id="PL" layoutX="30.0" layoutY="564.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Program length: " />
+   <Text fx:id="PS" layoutX="314.0" layoutY="538.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Program scope: " />
+   <Button fx:id="BackButton" layoutX="438.0" layoutY="555.0" mnemonicParsing="false" onAction="#GoBack" prefHeight="26.0" prefWidth="148.0" text="Back" />
+</AnchorPane>
