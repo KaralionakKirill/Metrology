@@ -18,18 +18,18 @@ public class FileService {
         this.file = file;
     }
 
-    public ArrayList<String> getLexemsFromFile(ArrayList<String> lexems) {
+    public ArrayList<String> getLexemesFromFile(ArrayList<String> lexemes) {
         try (FileReader fileReader = new FileReader(file)) {
             BufferedReader reader = new BufferedReader(fileReader);
             String line = reader.readLine();
             while (line != null) {
-                lexems = lexer.lexemsFromLine(line + "\n", lexems);
+                lexemes = lexer.lexemesFromLine(line + "\n", lexemes);
                 line = reader.readLine();
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return lexems;
+        return lexemes;
     }
 
 }

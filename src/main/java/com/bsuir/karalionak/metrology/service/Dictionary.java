@@ -11,25 +11,25 @@ public class Dictionary {
     };
 
     public final String[] PY_KEYWORDS = new String[]{
-            "False", "None", "True", "and", "as", "assert", "break", "class", "continue",
+            "None", "and", "as", "assert", "break", "class", "continue",
             "def", "del", "except", "finally", "for", "from", "global", "if", "import",
             "in", "is", "lambda", "nonlocal", "not", "or", "pass", "raise", "return",
             "try", "while", "with", "yield"
     };
 
     private final String[] PY_STATEMENTS = new String[]{
-            "+", "-", "*", "**", "/", "//", "%", "@", "<<", ">>", "&", "|", "^", "~", "<",
+            "+", "-", "*", "**", "/", "//", "%", "@", "<<", ">>", "&", "|", "^", "~", "<", "!",
             ">", "<=", ">=", "==", "!=", "+=", "-=", "=", "*=", "/=", "%=", "**=", "//=", "."
     };
 
-    public boolean lexemInPyStatements(String lexem) {
-        if(lexem.equals(" ")){
+    public boolean lexemeInPyStatements(String lexeme) {
+        if(lexeme.equals(" ")){
             return false;
         }
         boolean isLocatedInStatements = false;
         int i = 0;
         while (!isLocatedInStatements && i < PY_STATEMENTS.length) {
-            if (lexem.equals(PY_STATEMENTS[i])) {
+            if (lexeme.equals(PY_STATEMENTS[i])) {
                 isLocatedInStatements = true;
             }
             i++;
@@ -37,14 +37,14 @@ public class Dictionary {
         return isLocatedInStatements;
     }
 
-    public boolean lexemInPyKeywords(String lexem) {
-        if(lexem.equals(" ")){
+    public boolean lexemeInPyKeywords(String lexeme) {
+        if(lexeme.equals(" ")){
             return false;
         }
         boolean isLocatedInKeywords = false;
         int i = 0;
         while (!isLocatedInKeywords && i < PY_KEYWORDS.length) {
-            if (lexem.equals(PY_KEYWORDS[i])) {
+            if (lexeme.equals(PY_KEYWORDS[i])) {
                 isLocatedInKeywords = true;
             }
             i++;
@@ -52,7 +52,7 @@ public class Dictionary {
         return isLocatedInKeywords;
     }
 
-    public boolean lexemInPyIdentifier(String str) {
+    public boolean lexemeInPyIdentifier(String str) {
         if(str.equals(" ")){
             return false;
         }

@@ -1,12 +1,12 @@
 package com.bsuir.karalionak.metrology.model;
 
-public class LexemInf {
+public class LexemeInf {
     private String name;
     private int count;
 
     @Override
     public String toString() {
-        return "com.korolenock.metra.model.TLexemInf{" +
+        return "{" +
                 "name='" + name + '\'' +
                 ", count=" + count +
                 '}';

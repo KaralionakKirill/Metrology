@@ -1,22 +1,22 @@
 package com.bsuir.karalionak.metrology.service;
 
-import com.bsuir.karalionak.metrology.model.LexemInf;
+import com.bsuir.karalionak.metrology.model.LexemeInf;
 
 import java.util.ArrayList;
 
 public class Lexer {
     private final Dictionary dictionary = new Dictionary();
 
-    public ArrayList<LexemInf> getLexemInfo(ArrayList<String> arrOfLexems) {
-        ArrayList<LexemInf> list = new ArrayList<>();
+    public ArrayList<LexemeInf> getLexemeInfo(ArrayList<String> arrOfLexemes) {
+        ArrayList<LexemeInf> list = new ArrayList<>();
         int index;
-        for (String arrOfLexem : arrOfLexems) {
-            index = lexemInList(list, arrOfLexem);
-            LexemInf lexemInf = new LexemInf();
+        for (String arrOfLexeme : arrOfLexemes) {
+            index = lexemeInList(list, arrOfLexeme);
+            LexemeInf lexemeInf = new LexemeInf();
             if (index == -1) {
-                lexemInf.setName(arrOfLexem);
-                lexemInf.setCount(1);
-                list.add(lexemInf);
+                lexemeInf.setName(arrOfLexeme);
+                lexemeInf.setCount(1);
+                list.add(lexemeInf);
             } else {
                 list.get(index).incCount();
             }
@@ -24,39 +24,39 @@ public class Lexer {
         return list;
     }
 
-    public void lexAlloc(ArrayList<String> operands, ArrayList<String> operators, ArrayList<String> arrOfLexems) {
-        for (String arrOfLexem : arrOfLexems) {
-            if ((dictionary.lexemInPyStatements(arrOfLexem) || (dictionary.lexemInPyKeywords(arrOfLexem)))) {
-                operators.add(arrOfLexem);
-            } else if (arrOfLexem.contains("()")) {
-                operators.add(arrOfLexem);
+    public void lexAlloc(ArrayList<String> operands, ArrayList<String> operators, ArrayList<String> arrOfLexemes) {
+        for (String arrOfLexeme : arrOfLexemes) {
+            if ((dictionary.lexemeInPyStatements(arrOfLexeme) || (dictionary.lexemeInPyKeywords(arrOfLexeme)))) {
+                operators.add(arrOfLexeme);
+            } else if (arrOfLexeme.contains("()")) {
+                operators.add(arrOfLexeme);
             } else {
-                operands.add(arrOfLexem);
+                operands.add(arrOfLexeme);
             }
         }
     }
 
-    public ArrayList<String> lexemsFromLine(String str, ArrayList<String> result) {
-        int lexemPos = 0;
+    public ArrayList<String> lexemesFromLine(String str, ArrayList<String> result) {
+        int lexemePos = 0;
         int i;
         String lexem;
-        while (lexemPos < str.length()) {
-            while (str.charAt(lexemPos) == ' ') {
-                lexemPos++;
+        while (lexemePos < str.length()) {
+            while (str.charAt(lexemePos) == ' ') {
+                lexemePos++;
             }
 
-            if (str.charAt(lexemPos) == '#') {
+            if (str.charAt(lexemePos) == '#') {
                 break;
             }
 
-            i = lexemPos;
-            while (dictionary.lexemInPyIdentifier(Character.toString(str.charAt(i)))) {
+            i = lexemePos;
+            while (dictionary.lexemeInPyIdentifier(Character.toString(str.charAt(i)))) {
                 i++;
             }
 
             if (str.matches("[1-9?]]") && (str.charAt(i) == '.')) {
                 i++;
-                while (dictionary.lexemInPyIdentifier(Character.toString(str.charAt(i)))) {
+                while (dictionary.lexemeInPyIdentifier(Character.toString(str.charAt(i)))) {
                     i++;
                 }
             }
@@ -69,14 +69,14 @@ public class Lexer {
                 i++;
             }
 
-            if (i == lexemPos) {
-                while (dictionary.lexemInPyStatements(Character.toString(str.charAt(i)))) {
+            if (i == lexemePos) {
+                while (dictionary.lexemeInPyStatements(Character.toString(str.charAt(i)))) {
                     i++;
                 }
             }
 
-            lexem = str.substring(lexemPos, i);
-            if ((str.charAt(i) == '(') && (!dictionary.lexemInPyStatements(lexem))) {
+            lexem = str.substring(lexemePos, i);
+            if ((str.charAt(i) == '(') && (!dictionary.lexemeInPyStatements(lexem))) {
                 lexem += "()";
                 i++;
             }
@@ -86,20 +86,20 @@ public class Lexer {
             if (!lexem.equals("")) {
                 result.add(lexem);
             }
-            if (lexemPos < i) {
-                lexemPos = i;
+            if (lexemePos < i) {
+                lexemePos = i;
             } else {
-                lexemPos = i + 1;
+                lexemePos = i + 1;
             }
         }
         return result;
     }
 
-    public int lexemInList(ArrayList<LexemInf> list, String lexem) {
+    public int lexemeInList(ArrayList<LexemeInf> list, String lexeme) {
         int result = -1;
         int i = 0;
         while (i < list.size()) {
-            if (lexem.equals(list.get(i).getName())) {
+            if (lexeme.equals(list.get(i).getName())) {
                 result = i;
                 return result;
             }

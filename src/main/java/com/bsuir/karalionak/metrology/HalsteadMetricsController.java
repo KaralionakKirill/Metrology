@@ -1,8 +1,8 @@
 package com.bsuir.karalionak.metrology;
 
 import com.bsuir.karalionak.metrology.model.Item;
-import com.bsuir.karalionak.metrology.model.LexemInf;
-import com.bsuir.karalionak.metrology.model.Lexems;
+import com.bsuir.karalionak.metrology.model.LexemeInf;
+import com.bsuir.karalionak.metrology.model.Lexemes;
 import com.bsuir.karalionak.metrology.service.FileService;
 import com.bsuir.karalionak.metrology.service.Lexer;
 import javafx.collections.FXCollections;
@@ -25,7 +25,7 @@ public class HalsteadMetricsController implements Initializable {
     private static final ObservableList<Item> dataOperand = FXCollections.observableArrayList();
 
 
-    private final Lexems lexems;
+    private final Lexemes lexemes;
     private final Lexer lexer;
 
 
@@ -48,18 +48,18 @@ public class HalsteadMetricsController implements Initializable {
     public Button BackButton;
 
     {
-        lexems = new Lexems();
+        lexemes = new Lexemes();
         lexer = new Lexer();
     }
 
-    private static void fillData(ArrayList<LexemInf> operators, ArrayList<LexemInf> operands) {
+    private static void fillData(ArrayList<LexemeInf> operators, ArrayList<LexemeInf> operands) {
         int id = 1;
-        for (LexemInf lexem : operands) {
-            dataOperand.add(new Item(lexem.getName(), lexem.getCount(), id++));
+        for (LexemeInf lexeme : operands) {
+            dataOperand.add(new Item(lexeme.getName(), lexeme.getCount(), id++));
         }
         id = 1;
-        for (LexemInf lexem : operators) {
-            dataOperator.add(new Item(lexem.getName(), lexem.getCount(), id++));
+        for (LexemeInf lexeme : operators) {
+            dataOperator.add(new Item(lexeme.getName(), lexeme.getCount(), id++));
         }
     }
 
@@ -68,7 +68,7 @@ public class HalsteadMetricsController implements Initializable {
         File file = fileChooser.showOpenDialog(App.getAppStage());
         if (file != null && file.getAbsolutePath().matches("^.+.txt$")) {
             FileService fileService = new FileService(file);
-            initLexems(fileService);
+            initLexemes(fileService);
             fillTable();
             displayMetrics();
         } else {
@@ -81,16 +81,14 @@ public class HalsteadMetricsController implements Initializable {
         }
     }
 
-    public void initLexems(FileService fileService) {
-        lexems.setLexems(fileService.getLexemsFromFile(lexems.getLexems()));
+    public void initLexemes(FileService fileService) {
+        lexemes.setLexemes(fileService.getLexemesFromFile(lexemes.getLexemes()));
         ArrayList<String> operator = new ArrayList<>();
         ArrayList<String> operands = new ArrayList<>();
-        lexer.lexAlloc(operands, operator, lexems.getLexems());
-        lexems.setOperands(lexer.getLexemInfo(operands));
-        lexems.setOperators(lexer.getLexemInfo(operator));
-        fillData(lexems.getOperators(), lexems.getOperands());
-        System.out.println(lexems.getOperands());
-        System.out.println(lexems.getOperators());
+        lexer.lexAlloc(operands, operator, lexemes.getLexemes());
+        lexemes.setOperands(lexer.getLexemeInfo(operands));
+        lexemes.setOperators(lexer.getLexemeInfo(operator));
+        fillData(lexemes.getOperators(), lexemes.getOperands());
     }
 
     private void fillTable() {
@@ -101,15 +99,15 @@ public class HalsteadMetricsController implements Initializable {
     private void displayMetrics() {
         int totalOperatorsOccurrence = 0;
         int totalOperandsOccurrence = 0;
-        int uniqueOperators = lexems.getOperators().size();
-        int uniqueOperands = lexems.getOperands().size();
+        int uniqueOperators = lexemes.getOperators().size();
+        int uniqueOperands = lexemes.getOperands().size();
 
-        for (int i = 0; i < lexems.getOperators().size(); i++) {
-            totalOperatorsOccurrence += lexems.getOperators().get(i).getCount();
+        for (int i = 0; i < lexemes.getOperators().size(); i++) {
+            totalOperatorsOccurrence += lexemes.getOperators().get(i).getCount();
         }
 
-        for (int i = 0; i < lexems.getOperands().size(); i++) {
-            totalOperandsOccurrence += lexems.getOperands().get(i).getCount();
+        for (int i = 0; i < lexemes.getOperands().size(); i++) {
+            totalOperandsOccurrence += lexemes.getOperands().get(i).getCount();
         }
 
         int programDictionary = uniqueOperands + uniqueOperators;
