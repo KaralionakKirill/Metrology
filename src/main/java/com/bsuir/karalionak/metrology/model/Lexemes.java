@@ -7,37 +7,43 @@ public class Lexemes {
     private ArrayList<LexemeInf> operands;
     private ArrayList<LexemeInf> operators;
 
-    public Lexemes(){
+    public Lexemes() {
         lexemes = new ArrayList<>();
         operands = new ArrayList<>();
         operators = new ArrayList<>();
+    }
+
+    public void clear() {
+        lexemes.clear();
+        operands.clear();
+        operators.clear();
     }
 
     public ArrayList<String> getLexemes() {
         return lexemes;
     }
 
-    public ArrayList<LexemeInf> getOperands() {
-        return operands;
-    }
-
-    public ArrayList<LexemeInf> getOperators() {
-        return operators;
-    }
-
     public void setLexemes(ArrayList<String> lexemes) {
         this.lexemes = lexemes;
+    }
+
+    public ArrayList<LexemeInf> getOperands() {
+        return operands;
     }
 
     public void setOperands(ArrayList<LexemeInf> operands) {
         this.operands = operands;
     }
 
+    public ArrayList<LexemeInf> getOperators() {
+        return operators;
+    }
+
     public void setOperators(ArrayList<LexemeInf> operators) {
         this.operators = operators;
     }
 
-    public int getMaxSize (){
+    public int getMaxSize() {
         return Math.max(operands.size(), operators.size());
     }
 }

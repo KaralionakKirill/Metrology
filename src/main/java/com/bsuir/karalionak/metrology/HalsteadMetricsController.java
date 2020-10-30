@@ -53,6 +53,8 @@ public class HalsteadMetricsController implements Initializable {
     }
 
     private static void fillData(ArrayList<LexemeInf> operators, ArrayList<LexemeInf> operands) {
+        dataOperand.clear();
+        dataOperator.clear();
         int id = 1;
         for (LexemeInf lexeme : operands) {
             dataOperand.add(new Item(lexeme.getName(), lexeme.getCount(), id++));
@@ -82,6 +84,7 @@ public class HalsteadMetricsController implements Initializable {
     }
 
     public void initLexemes(FileService fileService) {
+        lexemes.clear();
         lexemes.setLexemes(fileService.getLexemesFromFile(lexemes.getLexemes()));
         ArrayList<String> operator = new ArrayList<>();
         ArrayList<String> operands = new ArrayList<>();
@@ -114,13 +117,21 @@ public class HalsteadMetricsController implements Initializable {
         int programLength = totalOperandsOccurrence + totalOperatorsOccurrence;
         int programScope = (int) Math.round(programLength * (Math.log10(programDictionary) / Math.log10(2)));
 
-        UDS.setText(UDS.getText() + uniqueOperands);
-        URS.setText(URS.getText() + uniqueOperators);
-        TDS.setText(TDS.getText() + totalOperandsOccurrence);
-        TRS.setText(TRS.getText() + totalOperatorsOccurrence);
-        PD.setText(PD.getText() + programDictionary);
-        PL.setText(PL.getText() + programLength);
-        PS.setText(PS.getText() + programScope);
+
+        String UDS_S = "Unique operands: ";
+        UDS.setText(UDS_S + uniqueOperands);
+        String URS_S = "Unique operators: ";
+        URS.setText(URS_S + uniqueOperators);
+        String TDS_S = "Total operands occurrence: ";
+        TDS.setText(TDS_S + totalOperandsOccurrence);
+        String TRS_S = "Total operators occurrence: ";
+        TRS.setText(TRS_S + totalOperatorsOccurrence);
+        String PD_S = "Program dictionary: ";
+        PD.setText(PD_S + programDictionary);
+        String PL_S = "Program length: ";
+        PL.setText(PL_S + programLength);
+        String PS_S = "Program scope: ";
+        PS.setText(PS_S + programScope);
     }
 
     @Override
