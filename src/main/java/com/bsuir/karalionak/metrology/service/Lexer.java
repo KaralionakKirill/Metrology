@@ -54,7 +54,7 @@ public class Lexer {
                 i++;
             }
 
-            if (str.matches("[1-9?]]") && (str.charAt(i) == '.')) {
+            if (str.matches("[0-9]") && (str.charAt(i) == '.')) {
                 i++;
                 while (dictionary.lexemeInPyIdentifier(Character.toString(str.charAt(i)))) {
                     i++;

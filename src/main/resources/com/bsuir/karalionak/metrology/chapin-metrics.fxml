@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.bsuir.karalionak.metrology.ChapinMetricsController">
+    <MenuBar layoutY="1.0" prefHeight="26.0" prefWidth="600.0">
+        <Menu mnemonicParsing="false" text="File">
+            <MenuItem fx:id="OpenFileMenuItem" mnemonicParsing="false" onAction="#openFileAction" text="Open File" />
+        </Menu>
+    </MenuBar>
+   <TableView fx:id="TableOfOperands" layoutY="27.0" prefHeight="400.0" prefWidth="300.0">
+     <columns>
+       <TableColumn fx:id="Number" prefWidth="50.0" text="N" />
+       <TableColumn fx:id="Operands" prefWidth="200.0" text="Operands" />
+         <TableColumn fx:id="F_Operands" prefWidth="50.0" text="F()" />
+     </columns>
+   </TableView>
+   <TableView layoutX="300.0" layoutY="27.0" prefHeight="400.0" prefWidth="300.0">
+     <columns>
+       <TableColumn prefWidth="75.0" text="C1" />
+       <TableColumn prefWidth="75.0" text="C2" />
+     </columns>
+   </TableView>
+   <Button fx:id="BackButton" layoutX="450.0" layoutY="549.0" mnemonicParsing="false" onAction="#goBack" prefHeight="25.0" prefWidth="126.0" text="Back" />
+</AnchorPane>

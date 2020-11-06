@@ -7,8 +7,13 @@ import java.io.IOException;
 
 public class MenuController {
     public Button HalstedMetricsButton;
+    public Button ChapinMetrics;
 
-    public void GoToHalstedMetrics(ActionEvent actionEvent) throws IOException {
+    public void goToHalstedMetrics(ActionEvent actionEvent) throws IOException {
         App.setRoot("halstead-metrics");
+    }
+
+    public void goToChapinMetrics(ActionEvent actionEvent) throws IOException {
+        App.setRoot("chapin-metrics");
     }
 }

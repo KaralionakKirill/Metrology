@@ -3,9 +3,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
-<AnchorPane prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1"
-            xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.bsuir.karalionak.metrology.MenuController">
-    <Button fx:id="HalstedMetricsButton" layoutX="225.0" layoutY="197.0" mnemonicParsing="false"
-            onAction="#GoToHalstedMetrics" prefHeight="50.0" prefWidth="150.0" text="Halstead Metrics"/>
+<AnchorPane prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.bsuir.karalionak.metrology.MenuController">
+    <Button fx:id="HalstedMetricsButton" layoutX="225.0" layoutY="197.0" mnemonicParsing="false" onAction="#goToHalstedMetrics" prefHeight="50.0" prefWidth="150.0" text="Halstead Metrics" />
+   <Button fx:id="ChapinMetrics" layoutX="225.0" layoutY="300.0" mnemonicParsing="false" onAction="#goToChapinMetrics" prefHeight="50.0" prefWidth="150.0" text="Chapin Metrics" />
 </AnchorPane>

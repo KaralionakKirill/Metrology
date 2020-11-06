@@ -43,7 +43,4 @@ public class Lexemes {
         this.operators = operators;
     }
 
-    public int getMaxSize() {
-        return Math.max(operands.size(), operators.size());
-    }
 }

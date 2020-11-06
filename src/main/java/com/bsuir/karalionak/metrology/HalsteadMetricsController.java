@@ -65,7 +65,7 @@ public class HalsteadMetricsController implements Initializable {
         }
     }
 
-    public void OpenFileAction(ActionEvent actionEvent) {
+    public void openFileAction(ActionEvent actionEvent) {
         FileChooser fileChooser = new FileChooser();
         File file = fileChooser.showOpenDialog(App.getAppStage());
         if (file != null && file.getAbsolutePath().matches("^.+.txt$")) {
@@ -144,7 +144,7 @@ public class HalsteadMetricsController implements Initializable {
         F_Operands.setCellValueFactory(new PropertyValueFactory<>("count"));
     }
 
-    public void GoBack(ActionEvent actionEvent) throws IOException {
+    public void goBack(ActionEvent actionEvent) throws IOException {
         App.setRoot("menu");
     }
 }
