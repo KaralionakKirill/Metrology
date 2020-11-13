@@ -14,7 +14,7 @@ public class Dictionary {
             "None", "and", "as", "assert", "break", "class", "continue",
             "def", "del", "except", "finally", "for", "from", "global", "if", "import",
             "in", "is", "lambda", "nonlocal", "not", "or", "pass", "raise", "return",
-            "try", "while", "with", "yield"
+            "try", "while", "with", "yield", "else", "elif"
     };
 
     private final String[] PY_STATEMENTS = new String[]{

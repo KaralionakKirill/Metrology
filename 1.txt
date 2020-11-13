@@ -1,0 +1,35 @@
+def Distance(self, size, row, iteration):
+            if ((size == 0) or (size == 1)):
+                return 1
+
+            if ((row == 0) or (row == size - 1)):
+                return (size - 1) * 2
+
+            if (iteration % 2 == 0):
+                return (size - 1 - row) * 2
+
+            return 2 * row
+
+        key = int(key)
+
+        if key < 0:
+            print("Error")
+        else:
+            decodedmessage = ''
+            CurrPosition = 0
+            row = 0
+            word_list = list(D_text)
+            while row < key:
+                iter = 0
+                i = row
+                while i < len(D_text):
+                    word_list[i] = D_text[CurrPosition]
+                    CurrPosition += 1
+                    i = i + Distance(self, key, row, iter)
+                    iter += 1
+                row += 1
+            for letter in word_list:
+                decodedmessage += letter
+
+            print(decodedmessage)
+            return decodedmessage

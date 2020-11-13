@@ -3,6 +3,7 @@ package com.bsuir.karalionak.metrology;
 import com.bsuir.karalionak.metrology.model.Item;
 import com.bsuir.karalionak.metrology.model.LexemeInf;
 import com.bsuir.karalionak.metrology.model.Lexemes;
+import com.bsuir.karalionak.metrology.model.Variable;
 import com.bsuir.karalionak.metrology.service.FileService;
 import com.bsuir.karalionak.metrology.service.Lexer;
 import javafx.collections.FXCollections;
@@ -24,6 +25,7 @@ public class ChapinMetricsController implements Initializable {
 
     private final Lexemes lexemes;
     private final Lexer lexer;
+    private final ArrayList<Variable> listOfVariable;
 
     public MenuItem OpenFileMenuItem;
     public TableColumn<Item, Integer> Number;
@@ -34,6 +36,7 @@ public class ChapinMetricsController implements Initializable {
 
 
     {
+        listOfVariable = new ArrayList<>();
         lexemes = new Lexemes();
         lexer = new Lexer();
     }
@@ -74,8 +77,16 @@ public class ChapinMetricsController implements Initializable {
         ArrayList<String> operands = new ArrayList<>();
         lexer.lexAlloc(operands, operator, lexemes.getLexemes());
         lexemes.setOperands(lexer.getLexemeInfo(operands));
-        lexemes.setOperators(lexer.getLexemeInfo(operator));
+
         fillData(lexemes.getOperands());
+    }
+
+    public void fillVariable(ArrayList<LexemeInf> operands){
+        String str;
+        for(LexemeInf operand: operands){
+            str = operand.getName();
+            
+        }
     }
 
     @Override

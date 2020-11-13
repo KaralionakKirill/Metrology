@@ -22,5 +22,5 @@
        <TableColumn prefWidth="75.0" text="C2" />
      </columns>
    </TableView>
-   <Button fx:id="BackButton" layoutX="430.0" layoutY="517.0" mnemonicParsing="false" onAction="#goBack" prefHeight="43.0" prefWidth="126.0" text="Button" />
+   <Button fx:id="BackButton" layoutX="450.0" layoutY="549.0" mnemonicParsing="false" onAction="#goBack" prefHeight="25.0" prefWidth="126.0" text="Back" />
 </AnchorPane>

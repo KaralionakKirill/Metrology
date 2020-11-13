@@ -33,7 +33,6 @@ def PlayfairDE(mode):
     Files.WriteInFile(kek.encryptDecrypt(mode,kek.NormilizeText(text)))
 
 def MakeImage(path):
-
     im = PIL.Image.open(path)
     photo = PIL.ImageTk.PhotoImage(im)
     label = tkinter.Label(Main_Window)
@@ -41,7 +40,6 @@ def MakeImage(path):
     label.place(x=650, y=280)
 
 def MakeMainWindow():
-
     var = tkinter.IntVar()
     rbutton1 = tkinter.Radiobutton(Main_Window)
     rbutton1.place(x = 600, y = 600)
@@ -74,7 +72,6 @@ def Choose(count, entry, m):
         PlayfairDE(m)
 
 def NewWindow(window,rb3,rb2,rb1,img,butt,var):
-
     def Hide(lbl1,ent1,buttm,buttb,buttd):
         lbl1.place_forget()
         ent1.place_forget()
