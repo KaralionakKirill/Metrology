@@ -80,18 +80,6 @@ public class Variable {
     }
 
     @Override
-    public String toString() {
-        return "Variable{" +
-                "value='" + value + '\'' +
-                ", count=" + count +
-                ", isP=" + isP +
-                ", isM=" + isM +
-                ", isT=" + isT +
-                ", isC=" + isC +
-                '}';
-    }
-
-    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;

@@ -2,6 +2,7 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
 <AnchorPane prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.bsuir.karalionak.metrology.ChapinMetricsController">
     <MenuBar layoutY="1.0" prefHeight="26.0" prefWidth="600.0">
@@ -9,25 +10,56 @@
             <MenuItem fx:id="OpenFileMenuItem" mnemonicParsing="false" onAction="#openFileAction" text="Open File" />
         </Menu>
     </MenuBar>
-   <TableView fx:id="TableT" layoutX="450.0" layoutY="27.0" prefHeight="200.0" prefWidth="150.0">
+   <TableView fx:id="TableT" layoutX="450.0" layoutY="27.0" prefHeight="150.0" prefWidth="150.0">
      <columns>
        <TableColumn fx:id="GroupT" minWidth="125.0" prefWidth="150.0" text="T" />
      </columns>
    </TableView>
-   <TableView fx:id="TableC" layoutY="27.0" prefHeight="200.0" prefWidth="150.0">
+   <TableView fx:id="TableC" layoutY="27.0" prefHeight="150.0" prefWidth="150.0">
       <columns>
        <TableColumn fx:id="GroupC" minWidth="125.0" prefWidth="150.0" text="C" />
       </columns>
    </TableView>
-   <TableView fx:id="TableM" layoutX="150.0" layoutY="27.0" prefHeight="200.0" prefWidth="150.0">
+   <TableView fx:id="TableM" layoutX="150.0" layoutY="27.0" prefHeight="150.0" prefWidth="150.0">
       <columns>
        <TableColumn fx:id="GroupM" minWidth="150.0" prefWidth="150.0" text="M" />
       </columns>
    </TableView>
-   <TableView fx:id="TableP" layoutX="300.0" layoutY="27.0" prefHeight="200.0" prefWidth="150.0">
+   <TableView fx:id="TableP" layoutX="300.0" layoutY="27.0" prefHeight="150.0" prefWidth="150.0">
       <columns>
          <TableColumn fx:id="GroupP" minWidth="125.0" prefWidth="150.0" text="P" />
       </columns>
    </TableView>
    <Button fx:id="BackButton" layoutX="450.0" layoutY="549.0" mnemonicParsing="false" onAction="#goBack" prefHeight="25.0" prefWidth="126.0" text="Back" />
+   <Text fx:id="CR" layoutX="14.0" layoutY="203.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Q =">
+      <font>
+         <Font size="15.0" />
+      </font>
+   </Text>
+   <TableView fx:id="VariablesTable" layoutY="400.0" prefHeight="200.0" prefWidth="200.0">
+     <columns>
+       <TableColumn fx:id="VariablesColumn" prefWidth="150.0" text="Variables" />
+       <TableColumn fx:id="CountColumn" prefWidth="50.0" text="N" />
+     </columns>
+   </TableView>
+   <TableView fx:id="TableC_IO" layoutY="219.0" prefHeight="150.0" prefWidth="150.0">
+     <columns>
+       <TableColumn fx:id="GroupC_IO" prefWidth="150.0" text="C_IO" />
+     </columns>
+   </TableView>
+   <TableView fx:id="TableM_IO" layoutX="150.0" layoutY="219.0" prefHeight="150.0" prefWidth="150.0">
+      <columns>
+         <TableColumn fx:id="GroupM_IO" prefWidth="150.0" text="M_IO" />
+      </columns>
+   </TableView>
+   <TableView fx:id="TableP_IO" layoutX="300.0" layoutY="219.0" prefHeight="150.0" prefWidth="150.0">
+      <columns>
+         <TableColumn fx:id="GroupP_IO" prefWidth="150.0" text="P_IO" />
+      </columns>
+   </TableView>
+   <TableView fx:id="TableT_IO" layoutX="450.0" layoutY="219.0" prefHeight="150.0" prefWidth="150.0">
+      <columns>
+         <TableColumn fx:id="GroupT_IO" prefWidth="150.0" text="T_IO" />
+      </columns>
+   </TableView>
 </AnchorPane>
