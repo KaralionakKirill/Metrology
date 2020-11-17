@@ -1,5 +1,7 @@
 package com.bsuir.karalionak.metrology.service;
 
+import com.bsuir.karalionak.metrology.model.Variable;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -18,18 +20,30 @@ public class FileService {
         this.file = file;
     }
 
-    public ArrayList<String> getLexemesFromFile(ArrayList<String> lexemes) {
+    public void getLexemesFromFile(ArrayList<String> lexemes) {
         try (FileReader fileReader = new FileReader(file)) {
             BufferedReader reader = new BufferedReader(fileReader);
             String line = reader.readLine();
             while (line != null) {
-                lexemes = lexer.lexemesFromLine(line + "\n", lexemes);
+                lexer.lexemesFromLine(line + "\n", lexemes);
                 line = reader.readLine();
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return lexemes;
+    }
+
+    public void getVariablesFromFile(ArrayList<Variable> list) {
+        try (FileReader fileReader = new FileReader(file)) {
+            BufferedReader reader = new BufferedReader(fileReader);
+            String line = reader.readLine();
+            while (line != null) {
+                lexer.initListOfVariables(line + "\n", list);
+                line = reader.readLine();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 }

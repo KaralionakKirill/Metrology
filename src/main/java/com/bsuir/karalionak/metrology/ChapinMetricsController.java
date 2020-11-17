@@ -1,8 +1,5 @@
 package com.bsuir.karalionak.metrology;
 
-import com.bsuir.karalionak.metrology.model.Item;
-import com.bsuir.karalionak.metrology.model.LexemeInf;
-import com.bsuir.karalionak.metrology.model.Lexemes;
 import com.bsuir.karalionak.metrology.model.Variable;
 import com.bsuir.karalionak.metrology.service.FileService;
 import com.bsuir.karalionak.metrology.service.Lexer;
@@ -21,31 +18,43 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class ChapinMetricsController implements Initializable {
-    private static final ObservableList<Item> dataOperand = FXCollections.observableArrayList();
+    private static final ObservableList<Variable> listC = FXCollections.observableArrayList();
+    private static final ObservableList<Variable> listM = FXCollections.observableArrayList();
+    private static final ObservableList<Variable> listP = FXCollections.observableArrayList();
+    private static final ObservableList<Variable> listT = FXCollections.observableArrayList();
 
-    private final Lexemes lexemes;
     private final Lexer lexer;
     private final ArrayList<Variable> listOfVariable;
 
     public MenuItem OpenFileMenuItem;
-    public TableColumn<Item, Integer> Number;
-    public TableColumn<Item, String> Operands;
-    public TableColumn<Item, Integer> F_Operands;
     public Button BackButton;
-    public TableView<Item> TableOfOperands;
+    public TableColumn<Variable, String> GroupC;
+    public TableColumn<Variable, String> GroupM;
+    public TableColumn<Variable, String> GroupP;
+    public TableColumn<Variable, String> GroupT;
+    public TableView<Variable> TableT;
+    public TableView<Variable> TableC;
+    public TableView<Variable> TableM;
+    public TableView<Variable> TableP;
 
 
     {
         listOfVariable = new ArrayList<>();
-        lexemes = new Lexemes();
         lexer = new Lexer();
     }
 
-    private static void fillData(ArrayList<LexemeInf> operands) {
-        dataOperand.clear();
-        int id = 1;
-        for (LexemeInf lexeme : operands) {
-            dataOperand.add(new Item(lexeme.getName(), lexeme.getCount(), id++));
+
+    public void initGroupLists() {
+        for (Variable v : listOfVariable) {
+            if (v.isC()) {
+                listC.add(v);
+            } else if (v.isM()) {
+                listM.add(v);
+            }else if(v.isP()){
+                listP.add(v);
+            }else{
+                listT.add(v);
+            }
         }
     }
 
@@ -54,7 +63,8 @@ public class ChapinMetricsController implements Initializable {
         File file = fileChooser.showOpenDialog(App.getAppStage());
         if (file != null && file.getAbsolutePath().matches("^.+.txt$")) {
             FileService fileService = new FileService(file);
-            initLexemes(fileService);
+            initVariables(fileService);
+            initGroupLists();
             fillTable();
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -67,33 +77,23 @@ public class ChapinMetricsController implements Initializable {
     }
 
     private void fillTable() {
-        TableOfOperands.setItems(dataOperand);
+        TableT.setItems(listT);
+        TableP.setItems(listP);
+        TableM.setItems(listM);
+        TableC.setItems(listC);
     }
 
-    public void initLexemes(FileService fileService) {
-        lexemes.clear();
-        lexemes.setLexemes(fileService.getLexemesFromFile(lexemes.getLexemes()));
-        ArrayList<String> operator = new ArrayList<>();
-        ArrayList<String> operands = new ArrayList<>();
-        lexer.lexAlloc(operands, operator, lexemes.getLexemes());
-        lexemes.setOperands(lexer.getLexemeInfo(operands));
-
-        fillData(lexemes.getOperands());
-    }
-
-    public void fillVariable(ArrayList<LexemeInf> operands){
-        String str;
-        for(LexemeInf operand: operands){
-            str = operand.getName();
-            
-        }
+    public void initVariables(FileService fileService) {
+        listOfVariable.clear();
+        fileService.getVariablesFromFile(listOfVariable);
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        Number.setCellValueFactory(new PropertyValueFactory<>("id"));
-        Operands.setCellValueFactory(new PropertyValueFactory<>("name"));
-        F_Operands.setCellValueFactory(new PropertyValueFactory<>("count"));
+        GroupC.setCellValueFactory(new PropertyValueFactory<>("value"));
+        GroupM.setCellValueFactory(new PropertyValueFactory<>("value"));
+        GroupP.setCellValueFactory(new PropertyValueFactory<>("value"));
+        GroupT.setCellValueFactory(new PropertyValueFactory<>("value"));
     }
 
     public void goBack(ActionEvent actionEvent) throws IOException {

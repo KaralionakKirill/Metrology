@@ -85,7 +85,7 @@ public class HalsteadMetricsController implements Initializable {
 
     public void initLexemes(FileService fileService) {
         lexemes.clear();
-        lexemes.setLexemes(fileService.getLexemesFromFile(lexemes.getLexemes()));
+        fileService.getLexemesFromFile(lexemes.getLexemes());
         ArrayList<String> operator = new ArrayList<>();
         ArrayList<String> operands = new ArrayList<>();
         lexer.lexAlloc(operands, operator, lexemes.getLexemes());
