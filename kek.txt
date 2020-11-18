@@ -1,0 +1,17 @@
+mem = True
+if mem:
+    kek = 2
+    sum = 23 - 111
+    for i in range(kek):
+        c += sum
+        k = input()
+        if k:
+            break
+            print(k)
+d = input()
+print(mem)
+if c:
+    kek = 5
+    b = kek + 2
+    for j in range(kek):
+    c += sum

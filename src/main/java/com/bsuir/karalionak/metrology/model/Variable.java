@@ -9,6 +9,18 @@ public class Variable {
     private boolean isM = false;
     private boolean isT = false;
     private boolean isC = false;
+    private boolean isOutputOrInput = false;
+
+    public Variable() {
+    }
+
+    public boolean isOutputOrInput() {
+        return isOutputOrInput;
+    }
+
+    public void setOutputOrInput(boolean outputOrInput) {
+        isOutputOrInput = outputOrInput;
+    }
 
     public Variable(String value) {
         this.value = value;

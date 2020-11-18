@@ -22,8 +22,24 @@ public class Dictionary {
             ">", "<=", ">=", "==", "!=", "+=", "-=", "=", "*=", "/=", "%=", "**=", "//=", "."
     };
 
+    private final String[] MODIFYING_STATEMENTS = new String[]{
+            "+=", "-=", "=", "*=", "/=", "%=", "**=", "//="
+    };
+
+    public boolean lexemeInModifyingStatements(String lexeme) {
+        boolean isLocatedInModifyingStatements = false;
+        int i = 0;
+        while (!isLocatedInModifyingStatements && i < MODIFYING_STATEMENTS.length) {
+            if (lexeme.equals(MODIFYING_STATEMENTS[i])) {
+                isLocatedInModifyingStatements = true;
+            }
+            i++;
+        }
+        return isLocatedInModifyingStatements;
+    }
+
     public boolean lexemeInPyStatements(String lexeme) {
-        if(lexeme.equals(" ")){
+        if (lexeme.equals(" ")) {
             return false;
         }
         boolean isLocatedInStatements = false;
@@ -38,7 +54,7 @@ public class Dictionary {
     }
 
     public boolean lexemeInPyKeywords(String lexeme) {
-        if(lexeme.equals(" ")){
+        if (lexeme.equals(" ")) {
             return false;
         }
         boolean isLocatedInKeywords = false;
@@ -53,7 +69,7 @@ public class Dictionary {
     }
 
     public boolean lexemeInPyIdentifier(String str) {
-        if(str.equals(" ")){
+        if (str.equals(" ")) {
             return false;
         }
         boolean isLocatedInIdentifier = false;

@@ -1,4 +1,5 @@
-a = 10;
+a = input();
+print(b);
 
 
 def Choose(count, entry, m):
@@ -19,7 +20,6 @@ class RailRoadHedge():
     def NormilizeText(self, text):
         text = text.lower()
         text = text.replace(' ', '')
-        return ''.join(c for c in text if c in string.ascii_letters)
 
     def Encode(self, key, E_text):
 

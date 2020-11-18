@@ -24,10 +24,15 @@ public class ChapinMetricsController implements Initializable {
     private static final ObservableList<Variable> listM = FXCollections.observableArrayList();
     private static final ObservableList<Variable> listP = FXCollections.observableArrayList();
     private static final ObservableList<Variable> listT = FXCollections.observableArrayList();
+    private static final ObservableList<Variable> listC_IO = FXCollections.observableArrayList();
+    private static final ObservableList<Variable> listM_IO = FXCollections.observableArrayList();
+    private static final ObservableList<Variable> listP_IO = FXCollections.observableArrayList();
+    private static final ObservableList<Variable> listT_IO = FXCollections.observableArrayList();
     private static final ObservableList<Variable> listVariables = FXCollections.observableArrayList();
 
     private final Lexer lexer;
     private final ArrayList<Variable> listOfVariable;
+    private int countOfVariables = 0;
 
     public MenuItem OpenFileMenuItem;
     public Button BackButton;
@@ -51,6 +56,8 @@ public class ChapinMetricsController implements Initializable {
     public TableColumn<Variable, Integer> CountColumn;
     public TableColumn<Variable, String> VariablesColumn;
     public Text CR;
+    public Text CR_IO;
+    public Text Variables_Count;
 
 
     {
@@ -60,18 +67,38 @@ public class ChapinMetricsController implements Initializable {
 
     public void initGroupLists() {
         for (Variable v : listOfVariable) {
+            countOfVariables += v.getCount();
             listVariables.add(v);
-            if (v.isC()) {
-                listC.add(v);
-            } else if (v.isM()) {
-                listM.add(v);
-            } else if (v.isP()) {
-                listP.add(v);
-            } else {
-                listT.add(v);
-            }
+            listsChapinGroup(v);
+            listsChapinGroup_IO(v);
         }
         outputResult();
+    }
+
+    private void listsChapinGroup_IO(Variable v){
+        if(v.isOutputOrInput()) {
+            if (v.isC()) {
+                listC_IO.add(v);
+            } else if (v.isM()) {
+                listM_IO.add(v);
+            } else if (v.isP()) {
+                listP_IO.add(v);
+            } else {
+                listT_IO.add(v);
+            }
+        }
+    }
+
+    private void listsChapinGroup(Variable v){
+        if (v.isC()) {
+            listC.add(v);
+        } else if (v.isM()) {
+            listM.add(v);
+        } else if (v.isP()) {
+            listP.add(v);
+        } else {
+            listT.add(v);
+        }
     }
 
     public void openFileAction(ActionEvent actionEvent) {
@@ -93,6 +120,10 @@ public class ChapinMetricsController implements Initializable {
     }
 
     private void fillTable() {
+        TableC_IO.setItems(listC_IO);
+        TableM_IO.setItems(listM_IO);
+        TableP_IO.setItems(listP_IO);
+        TableT_IO.setItems(listT_IO);
         TableT.setItems(listT);
         TableP.setItems(listP);
         TableM.setItems(listM);
@@ -106,14 +137,24 @@ public class ChapinMetricsController implements Initializable {
     }
 
     public void outputResult() {
-        int reult = 3 * listC.size() + 2 * listM.size() + listP.size() + listT.size() / 2;
+        int result = 3 * listC.size() + 2 * listM.size() + listP.size() + listT.size() / 2;
         StringBuilder resultStr = new StringBuilder("Q = ");
         resultStr.append("3*").append(listC.size()).append(" + ");
         resultStr.append("2*").append(listM.size()).append("  + ");
         resultStr.append("1*").append(listP.size()).append(" + ");
         resultStr.append("0,5*").append(listT.size()).append(" = ");
-        resultStr.append(reult);
+        resultStr.append(result);
         CR.setText(resultStr.toString());
+        result = 3 * listC_IO.size() + 2 * listM_IO.size() + listP_IO.size() + listT_IO.size() / 2;
+        resultStr = new StringBuilder("Q = ");
+        resultStr.append("3*").append(listC_IO.size()).append(" + ");
+        resultStr.append("2*").append(listM_IO.size()).append("  + ");
+        resultStr.append("1*").append(listP_IO.size()).append(" + ");
+        resultStr.append("0,5*").append(listT_IO.size()).append(" = ");
+        resultStr.append(result);
+        CR_IO.setText(resultStr.toString());
+        String count = "Count = " + countOfVariables;
+        Variables_Count.setText(count);
     }
 
     @Override

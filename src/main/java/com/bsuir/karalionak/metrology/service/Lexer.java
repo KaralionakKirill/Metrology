@@ -114,24 +114,41 @@ public class Lexer {
         listOfLexemes.clear();
         lexemesFromLine(line, listOfLexemes);
         String group = "T";
+        boolean isOutputVariable = false;
         Variable variable;
+        Variable lastVariable = new Variable();
         int index;
         for (String lexeme : listOfLexemes) {
-            if(lexeme.equals("input()")){
-                index = listVariable.size() - 1;
-                listVariable.get(index).setFunctionGroup("P");
+            if (lexeme.equals("input()")) {
+                index = listVariable.indexOf(lastVariable);
+                listVariable.get(index).setOutputOrInput(true);
             }
-            if (dictionary.lexemeInPyKeywords(lexeme)) {
+            if (lexeme.equals("print()")) {
+                isOutputVariable = true;
+            }
+            if (dictionary.lexemeInPyKeywords(lexeme) && !listOfLexemes.contains("def")) {
                 group = "C";
             }
-            if (dictionary.lexemeInPyStatements(lexeme)) {
-                group = "M";
+            if (dictionary.lexemeInModifyingStatements(lexeme)) {
+                index = listVariable.indexOf(lastVariable);
+                if (listVariable.get(index).getCount() != 0) {
+                    listVariable.get(index).setFunctionGroup("M");
+                }
+            }
+            if (dictionary.lexemeInPyStatements(lexeme) || lexeme.contains("()") && !lexeme.equals("print()")
+                    && !listOfLexemes.contains("def")) {
+                group = "P";
             }
             if (isVariable(lexeme) && !dictionary.lexemeInPyKeywords(lexeme)) {
                 variable = new Variable(lexeme);
+                lastVariable = variable;
                 variable.setFunctionGroup(group);
+                variable.setOutputOrInput(isOutputVariable);
                 if (listVariable.contains(variable)) {
                     index = listVariable.indexOf(variable);
+                    if(isOutputVariable) {
+                        listVariable.get(index).setOutputOrInput(isOutputVariable);
+                    }
                     listVariable.get(index).incCount();
                     listVariable.get(index).setFunctionGroup(group);
                 } else {

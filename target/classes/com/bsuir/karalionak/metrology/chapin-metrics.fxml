@@ -62,4 +62,14 @@
          <TableColumn fx:id="GroupT_IO" prefWidth="150.0" text="T_IO" />
       </columns>
    </TableView>
+   <Text fx:id="CR_IO" layoutX="226.0" layoutY="405.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Q =">
+      <font>
+         <Font size="15.0" />
+      </font>
+   </Text>
+   <Text fx:id="Variables_Count" layoutX="227.0" layoutY="430.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Count =">
+      <font>
+         <Font size="15.0" />
+      </font>
+   </Text>
 </AnchorPane>
