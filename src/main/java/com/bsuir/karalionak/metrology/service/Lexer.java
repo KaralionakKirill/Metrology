@@ -135,8 +135,8 @@ public class Lexer {
                     listVariable.get(index).setFunctionGroup("M");
                 }
             }
-            if (dictionary.lexemeInPyStatements(lexeme) || lexeme.contains("()") && !lexeme.equals("print()")
-                    && !listOfLexemes.contains("def")) {
+            if (dictionary.lexemeInPyStatements(lexeme) || lexeme.contains("()") && !listOfLexemes.contains("def")
+                    && !group.equals("C")) {
                 group = "P";
             }
             if (isVariable(lexeme) && !dictionary.lexemeInPyKeywords(lexeme)) {

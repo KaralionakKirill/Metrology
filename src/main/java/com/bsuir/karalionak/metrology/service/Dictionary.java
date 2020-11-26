@@ -23,7 +23,7 @@ public class Dictionary {
     };
 
     private final String[] MODIFYING_STATEMENTS = new String[]{
-            "+=", "-=", "=", "*=", "/=", "%=", "**=", "//="
+            "+=", "-=", "=", "*=", "/=", "%=", "**=", "//=", "++", "--"
     };
 
     public boolean lexemeInModifyingStatements(String lexeme) {

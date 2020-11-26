@@ -66,6 +66,15 @@ public class ChapinMetricsController implements Initializable {
     }
 
     public void initGroupLists() {
+        listVariables.clear();
+        listM_IO.clear();
+        listC_IO.clear();
+        listP_IO.clear();
+        listT_IO.clear();
+        listM.clear();
+        listC.clear();
+        listP.clear();
+        listT.clear();
         for (Variable v : listOfVariable) {
             countOfVariables += v.getCount();
             listVariables.add(v);
@@ -137,7 +146,7 @@ public class ChapinMetricsController implements Initializable {
     }
 
     public void outputResult() {
-        int result = 3 * listC.size() + 2 * listM.size() + listP.size() + listT.size() / 2;
+        double result = 3 * listC.size() + 2 * listM.size() + listP.size() + listT.size() * 0.5;
         StringBuilder resultStr = new StringBuilder("Q = ");
         resultStr.append("3*").append(listC.size()).append(" + ");
         resultStr.append("2*").append(listM.size()).append("  + ");
@@ -145,7 +154,7 @@ public class ChapinMetricsController implements Initializable {
         resultStr.append("0,5*").append(listT.size()).append(" = ");
         resultStr.append(result);
         CR.setText(resultStr.toString());
-        result = 3 * listC_IO.size() + 2 * listM_IO.size() + listP_IO.size() + listT_IO.size() / 2;
+        result = 3 * listC_IO.size() + 2 * listM_IO.size() + listP_IO.size() + listT_IO.size() * 0.5;
         resultStr = new StringBuilder("Q = ");
         resultStr.append("3*").append(listC_IO.size()).append(" + ");
         resultStr.append("2*").append(listM_IO.size()).append("  + ");
